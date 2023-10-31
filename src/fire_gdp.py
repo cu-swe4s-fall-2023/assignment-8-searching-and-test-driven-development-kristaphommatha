@@ -19,8 +19,15 @@ def get_data(file_name, query_column, query_value, header=True):
     return result_row
 
 
-def search():
-    pass
+def search(nums, key):
+    indexes = []
+    index = 0
+    for k in nums:
+        if k == key:
+            indexes.append(index)
+        index += 1
+
+    return indexes
 
 
 def get_fire_gdp_year_data():
