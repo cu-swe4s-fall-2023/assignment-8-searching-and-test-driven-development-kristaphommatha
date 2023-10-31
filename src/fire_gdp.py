@@ -7,7 +7,8 @@ def get_data(file_name, query_column, query_value, header = True):
             for line in file:
                 data = line.rstrip().split(',')
                 if header == True and is_on_header:
-                    header = data
+                # if header is true, let header be the list in the first index
+                    result_row.append(data)
                 if data[query_column] == str(query_value):
                     result_row.append(data)
                 is_on_header = False
@@ -16,10 +17,7 @@ def get_data(file_name, query_column, query_value, header = True):
     except IndexError:
         return -2
 
-    if header == False:
-        return result_row
-    if header == True:
-        return result_row, header
+    return result_row
 
 def search():
     pass
