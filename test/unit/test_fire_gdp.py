@@ -53,6 +53,20 @@ class TestFireGDP(unittest.TestCase):
         
         self.assertListEqual(fire_gdp.search(nums, search_key), expected)
 
+    def test_search_positive(self):
+        nums = []
+        for i in range(100):
+            nums.append(random.randint(1, 100))
+        search_key = 0
+
+        nums[0] = search_key
+        nums[51] = search_key
+        nums[99] = search_key
+
+        expected = [0, 51, 99]
+        
+        self.assertListEqual(fire_gdp.search(nums, search_key), expected)
+
 
 if __name__ == "__main__":
     unittest.main()
