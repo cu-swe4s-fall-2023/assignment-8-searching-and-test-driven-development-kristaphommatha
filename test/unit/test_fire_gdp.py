@@ -29,7 +29,20 @@ class TestFireGDP(unittest.TestCase):
         expected = [['Query', '1990', '14.7237', '0.0557', '205.6077', '0'],
                     ['Query', '1991', '14.7237', '0.0557', '0', '0'],
                     ['Query', '1992', '14.7237', '0.0557', '196.5341', '0']]
-        self.assertListEqual(func_return, expected_return)
+        self.assertListEqual(func_return, expected)
+
+    def test_get_data_positive_yes_header(self):
+        test_query_col = 0
+        test_query_value = "Query"
+        func_return = fire_gdp.get_data('../data/test_data.csv',
+                                        test_query_col, test_query_value)
+        expected = [['Search', 'Year', 'Savanna fires', 'Forest fires',
+                     'Crop Residues', 'Rice Cultivation'],
+                    ['Query', '1990', '14.7237', '0.0557', '205.6077', '0'],
+                    ['Query', '1991', '14.7237', '0.0557', '0', '0'],
+                    ['Query', '1992', '14.7237', '0.0557', '196.5341', '0']]
+
+        self.assertListEqual(func_return, expected)
 
 
 if __name__ == "__main__":
