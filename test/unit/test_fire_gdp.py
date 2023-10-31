@@ -50,7 +50,7 @@ class TestFireGDP(unittest.TestCase):
             nums.append(random.randint(1, 100))
         search_key = 0
         expected = []
-        
+
         self.assertListEqual(fire_gdp.search(nums, search_key), expected)
 
     def test_search_positive(self):
@@ -64,7 +64,7 @@ class TestFireGDP(unittest.TestCase):
         nums[99] = search_key
 
         expected = [0, 51, 99]
-        
+
         self.assertListEqual(fire_gdp.search(nums, search_key), expected)
 
 
