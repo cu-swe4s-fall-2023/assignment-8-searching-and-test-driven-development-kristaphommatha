@@ -74,6 +74,11 @@ class TestFireGDP(unittest.TestCase):
 
         self.assertListEqual(func_return, expected)
 
+    def test_string_with_comma_to_float_negative(self):
+        test_string = ''
+        func_return = fire_gdp.string_with_comma_to_float(test_string)
+        self.assertListEqual(func_return, None)
+
 
 if __name__ == "__main__":
     unittest.main()
