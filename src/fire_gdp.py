@@ -4,7 +4,7 @@ def get_data(file_name, query_column, query_value, header=True):
     try:
         with open(file_name, 'r') as file:
             for line in file:
-                data = line.rstrip().split(',')
+                data = splitter(line.rstrip(), '"', ',')
                 if header is True:
                     if is_on_header is True:
                         result_row.append(data)
@@ -83,6 +83,17 @@ def string_with_comma_to_float(string):
         return float(new_string)
 
 
-def get_fire_gdp_year_data(fires_file, gdp_file, year,
-                           fire_query_col, fire_query_val):
-    pass
+def get_fire_gdp_year_data(fires_file, gdp_file,
+                           target_country, target_columns):
+# fires_file = file name containing CO2 data
+# gdp_file = file name containing GDP data
+# target_country = country to find info on
+# query_columns = list of columns to generate data on
+
+#(file_name, query_column, query_value, header=True)
+    fire_data = get_data(fires_file, 0, target_country, header=False)
+    gdp_data = get_data(gdp_file, 0, target_country)
+    if(type(fire_data) == list and type(gdp_data) ==  list):
+        pass
+    else:
+        return None

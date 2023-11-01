@@ -86,6 +86,14 @@ class TestFireGDP(unittest.TestCase):
         self.assertEqual(func_return, 12347.01)
         self.assertIs(type(func_return), float)
 
+    def test_year_data_get_data_fail(self):
+        fires_file = 'DoesNotExist.txt'
+        gdp_file = 'AlsoDoesNotExist.txt'
+        func_return = fire_gdp.get_fire_gdp_year_data(fires_file, gdp_file,
+                                                      'target_country',
+                                                      0)
+        self.assertIsNone(func_return)
+
 
 if __name__ == "__main__":
     unittest.main()
