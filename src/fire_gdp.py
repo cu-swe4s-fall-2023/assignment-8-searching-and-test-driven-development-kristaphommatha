@@ -69,5 +69,19 @@ def splitter(string, delimiter1, delimiter2):
     return new_strings
 
 
+def string_with_comma_to_float(string):
+    char_counter = 0
+    if len(string) == 0:
+        return None
+    else:
+        for char in string:
+            if char == ',':
+                comma_index = char_counter
+            char_counter += 1
+
+        new_string = ''.join([string[0:comma_index], string[comma_index + 1:]])
+        return float(new_string)
+
+
 def get_fire_gdp_year_data():
     pass
