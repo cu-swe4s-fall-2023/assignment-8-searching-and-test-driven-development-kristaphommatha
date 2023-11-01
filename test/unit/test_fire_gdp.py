@@ -77,7 +77,14 @@ class TestFireGDP(unittest.TestCase):
     def test_string_with_comma_to_float_negative(self):
         test_string = ''
         func_return = fire_gdp.string_with_comma_to_float(test_string)
-        self.assertListEqual(func_return, None)
+        self.assertEqual(func_return, None)
+
+    def test_string_with_comma_to_float_positive(self):
+        test_string = '12,347.01'
+        func_return = fire_gdp.string_with_comma_to_float(test_string)
+        expected = 12347
+        self.assertEqual(func_return, 12347.01)
+        self.assertIs(type(func_return), float)
 
 
 if __name__ == "__main__":
