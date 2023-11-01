@@ -67,6 +67,13 @@ class TestFireGDP(unittest.TestCase):
 
         self.assertListEqual(fire_gdp.search(nums, search_key), expected)
 
+    def test_splitter_mixture(self):
+        test_string = 'str,ex,"test,c",tester,"test2"'
+        func_return = fire_gdp.splitter(test_string, '"', ',')
+        expected = ['str', 'ex', 'test,c', 'tester', 'test2']
+
+        self.assertListEqual(func_return, expected)
+
 
 if __name__ == "__main__":
     unittest.main()
