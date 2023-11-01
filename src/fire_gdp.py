@@ -83,5 +83,6 @@ def string_with_comma_to_float(string):
         return float(new_string)
 
 
-def get_fire_gdp_year_data():
+def get_fire_gdp_year_data(fires_file, gdp_file, year,
+                           fire_query_col, fire_query_val):
     pass
