@@ -113,6 +113,21 @@ class TestFireGDP(unittest.TestCase):
         expected_error_code = -3
         self.assertEqual(func_return, expected_error_code)
 
+    def test_year_data_bad_ranges(self):
+        fires_file = '../data/test_data.csv'
+        gdp_file = '../data/IMF_GDP_mini.csv'
+        bad_year_col_range = fire_gdp.get_fire_gdp_year_data(fires_file,
+                                                             gdp_file,
+                                                             'Query',
+                                                             2, 1000)
+        bad_target_col_range = fire_gdp.get_fire_gdp_year_data(fires_file,
+                                                               gdp_file,
+                                                               'Query',
+                                                               1000, 1)
+        expected_error_code = -2
+        self.assertEqual(bad_year_col_range, expected_error_code)
+        self.assertEqual(bad_target_col_range, expected_error_code)
+
 
 if __name__ == "__main__":
     unittest.main()
