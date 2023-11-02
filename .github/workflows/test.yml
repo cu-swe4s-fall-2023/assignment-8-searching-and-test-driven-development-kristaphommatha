@@ -1,0 +1,34 @@
+name: tests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:     
+  run_unit_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mamba-org/setup-micromamba@v1
+        with:
+          environment-file: environment.yml
+          environment-name: hw8
+      - run: |
+          cd test/unit
+          python test_fire_gdp.py
+
+  run_style_check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mamba-org/setup-micromamba@v1
+        with:
+          environment-file: environment.yml
+          environment-name: hw8
+      - run: |
+          cd src
+          pycodestyle $(git ls-files "*.py")
+  

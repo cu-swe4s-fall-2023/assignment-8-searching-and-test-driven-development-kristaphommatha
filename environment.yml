@@ -1,0 +1,8 @@
+name: hw8
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - matplotlib
+  - pycodestyle
+  - snakemake
