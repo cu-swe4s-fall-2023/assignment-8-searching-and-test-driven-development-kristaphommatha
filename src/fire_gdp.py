@@ -15,6 +15,8 @@ def get_data(file_name, query_column, query_value, header=True):
         return -1
     except IndexError:
         return -2
+    except Exception as e:
+        return -3
 
     return result_row
 
@@ -26,7 +28,8 @@ def search(nums, key):
         if k == key:
             indexes.append(index)
         index += 1
-
+    if len(indexes) == 0:
+        return None
     return indexes
 
 
@@ -70,30 +73,52 @@ def splitter(string, delimiter1, delimiter2):
 
 
 def string_with_comma_to_float(string):
-    char_counter = 0
-    if len(string) == 0:
-        return None
-    else:
-        for char in string:
-            if char == ',':
-                comma_index = char_counter
-            char_counter += 1
-
-        new_string = ''.join([string[0:comma_index], string[comma_index + 1:]])
+    if len(string) != 0:
+        new_string = string.replace(',','')
         return float(new_string)
+    else:
+        return None
 
 
 def get_fire_gdp_year_data(fires_file, gdp_file,
-                           target_country, target_columns):
+                           target_country, target_column, year_col):
 # fires_file = file name containing CO2 data
 # gdp_file = file name containing GDP data
 # target_country = country to find info on
 # query_columns = list of columns to generate data on
 
 #(file_name, query_column, query_value, header=True)
+    fires = []
+    gdps = []
+    years = []
+    
     fire_data = get_data(fires_file, 0, target_country, header=False)
     gdp_data = get_data(gdp_file, 0, target_country)
-    if(type(fire_data) == list and type(gdp_data) ==  list):
-        pass
-    else:
-        return None
+
+    # catch error in get_data
+    if(type(fire_data) == int or type(gdp_data) ==  int):
+        return -1  # exit code for bad file inputs
+    else:  # get data worked
+        if (len(fire_data) == 0 or len(gdp_data) <= 1):
+            return -3 # exit code for country or year could not be found
+        if year_col >= len(fire_data):
+            return -2 # exit code for range error in target column or year col
+
+        for row in fire_data:  # search every row including info about the country
+            current_year = row[year_col]  # grab the associated year
+            year_indexes = search(gdp_data[0], current_year)  # find gdp data from current year
+            if year_indexes is not None:
+                for index in year_indexes:  # for all occurences of year in gdp_data
+                    if target_column < len(row):  # check if target_column is in range
+                        # check if gdp data is not empty
+                        if (gdp_data[1][index] != '...' and gdp_data[1][index] != '-'):
+                            fires.append(float(row[target_column]))
+                            gdps.append(string_with_comma_to_float(gdp_data[1][index]))
+                            years.append(int(current_year))
+                    else:  # exit code for range error in target column or year col
+                        return -2
+        if len(years) == 0:
+            return -3
+
+        return fires, gdps, years
+    
