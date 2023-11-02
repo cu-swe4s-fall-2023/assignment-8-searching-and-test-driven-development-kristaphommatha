@@ -7,6 +7,8 @@ import argparse
 
 
 def make_scatter(data_file, out_file, title, x, y):
+    X = []
+    Y = []
     try:
         for line in open(data_file):
             A = line.rstrip().split(',')
@@ -24,6 +26,7 @@ def make_scatter(data_file, out_file, title, x, y):
     ax.set_title(title)
 
     plt.savefig(out_file, bbox_inches='tight')
+    return 1
 
 
 def main():
@@ -64,7 +67,7 @@ def main():
         sys.exit(1)
 
     scatterplot = make_scatter(args.df, args.of, args.t, args.x, args.y)
-    if scatter_plot == -1:
+    if scatterplot == -1:
         sys.exit(1)
 
 
