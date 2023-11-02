@@ -119,6 +119,7 @@ def get_fire_gdp_year_data(fires_file, gdp_file,
 
         return fires, gdps, years
 
+
 def write_to_file(out_file, datas):
     with open(out_file, "w") as file:
         for groups in zip(*datas):
