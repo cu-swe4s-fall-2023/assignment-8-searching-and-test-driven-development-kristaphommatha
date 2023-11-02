@@ -72,8 +72,8 @@ def main():
               ' or gdp file')
         sys.exit()
 
-    if (type(c1_datas) == int or type(c2_datas) == int or
-            type(c3_datas) == int):
+    if (type(c1_datas) == int or type(c2_datas) == int or  # noqa
+            type(c3_datas) == int):  # noqa
         print('An error occurred.')
         sys.exit(1)
 
