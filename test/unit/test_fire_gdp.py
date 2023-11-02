@@ -26,9 +26,11 @@ class TestFireGDP(unittest.TestCase):
         func_return = fire_gdp.get_data('../data/test_data.csv',
                                         test_query_col, test_query_value,
                                         header=False)
-        expected = [['Query', '1990', '14.7237', '0.0557', '205.6077', '0'],
-                    ['Query', '1991', '14.7237', '0.0557', '0', '0'],
-                    ['Query', '1992', '14.7237', '0.0557', '196.5341', '0']]
+        expected = [['Query','1972','14.7237','0.0557','205.6077','0'],
+                    ['Query','1973','14.7237','0.0557','0','0'],
+                    ['Query','1975','14.7237','0.0557','196.5341','0'],
+                    ['Query','1953','1','2','3','4'],
+                    ['Query','1992','1','2','3','4']]
         self.assertListEqual(func_return, expected)
 
     def test_get_data_positive_yes_header(self):
@@ -38,9 +40,11 @@ class TestFireGDP(unittest.TestCase):
                                         test_query_col, test_query_value)
         expected = [['Search', 'Year', 'Savanna fires', 'Forest fires',
                      'Crop Residues', 'Rice Cultivation'],
-                    ['Query', '1990', '14.7237', '0.0557', '205.6077', '0'],
-                    ['Query', '1991', '14.7237', '0.0557', '0', '0'],
-                    ['Query', '1992', '14.7237', '0.0557', '196.5341', '0']]
+                    ['Query','1972','14.7237','0.0557','205.6077','0'],
+                    ['Query','1973','14.7237','0.0557','0','0'],
+                    ['Query','1975','14.7237','0.0557','196.5341','0'],
+                    ['Query','1953','1','2','3','4'],
+                    ['Query','1992','1','2','3','4']]
 
         self.assertListEqual(func_return, expected)
 
@@ -49,9 +53,8 @@ class TestFireGDP(unittest.TestCase):
         for i in range(100):
             nums.append(random.randint(1, 100))
         search_key = 0
-        expected = []
 
-        self.assertListEqual(fire_gdp.search(nums, search_key), expected)
+        self.assertIsNone(fire_gdp.search(nums, search_key))
 
     def test_search_positive(self):
         nums = []
@@ -90,9 +93,17 @@ class TestFireGDP(unittest.TestCase):
         fires_file = 'DoesNotExist.txt'
         gdp_file = 'AlsoDoesNotExist.txt'
         func_return = fire_gdp.get_fire_gdp_year_data(fires_file, gdp_file,
-                                                      'target_country',
-                                                      0)
-        self.assertIsNone(func_return)
+                                                      'target_country', 0, 0)
+        expected_error_code = -1
+        self.assertEqual(func_return, expected_error_code)
+
+    def test_year_data_no_year(self):
+        fires_file = '../data/test_data.csv'
+        gdp_file = '../data/IMF_GDP_mini.csv'
+        func_return = fire_gdp.get_fire_gdp_year_data(fires_file, gdp_file,
+                                                      'Query', 2, 4)
+        expected_error_code = -3
+        self.assertEqual(func_return, expected_error_code)
 
 
 if __name__ == "__main__":
