@@ -128,6 +128,28 @@ class TestFireGDP(unittest.TestCase):
         self.assertEqual(bad_year_col_range, expected_error_code)
         self.assertEqual(bad_target_col_range, expected_error_code)
 
+    def test_year_data_positive_check_lengths(self):
+        fires_file = '../data/test_data.csv'
+        gdp_file = '../data/IMF_GDP_mini.csv'
+        func_return = fire_gdp.get_fire_gdp_year_data(fires_file, gdp_file,
+                                                      'Query', 2, 1)
+        expected_length = 3
+        self.assertEqual(len(func_return[0]), expected_length)
+        self.assertEqual(len(func_return[1]), expected_length)
+        self.assertEqual(len(func_return[2]), expected_length)
+
+    def test_year_data_positive_check_vals(self):
+        fires_file = '../data/test_data.csv'
+        gdp_file = '../data/IMF_GDP_mini.csv'
+        func_return = fire_gdp.get_fire_gdp_year_data(fires_file, gdp_file,
+                                                      'Query', 2, 1)
+        fires_expected = [14.7237, 14.7237, 14.7237]
+        gdps_expected = [41872.07, 47847.99, 60953.22]
+        years_expected = [1972, 1973, 1975]
+        self.assertListEqual(func_return[0], fires_expected)
+        self.assertListEqual(func_return[1], gdps_expected)
+        self.assertListEqual(func_return[2], years_expected)
+
 
 if __name__ == "__main__":
     unittest.main()
