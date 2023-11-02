@@ -1,7 +1,9 @@
 Search,Year,Savanna fires,Forest fires,Crop Residues,Rice Cultivation
-Query,1990,14.7237,0.0557,205.6077,0
-Query,1991,14.7237,0.0557,0,0
-Query,1992,14.7237,0.0557,196.5341,0
+Query,1972,14.7237,0.0557,205.6077,0
+Query,1973,14.7237,0.0557,0,0
+Query,1975,14.7237,0.0557,196.5341,0
+Query,1953,1,2,3,4
+Query,1992,1,2,3,4
 Afghanistan,2002,9.0562,0,266.1975,0
 Canada,random string,55.8052,0,324.2195,0
 Canada,2004,11.9759,0,266.9995,0
