@@ -1,5 +1,4 @@
 import sys
-import numpy as np
 import matplotlib
 matplotlib.use('Agg')  # noqa
 import matplotlib.pyplot as plt
@@ -60,14 +59,14 @@ def main():
         sys.exit(1)
 
     c1_datas = fire_gdp.get_fire_gdp_year_data(args.ff, args.gf,
-                                                args.c1, args.q,
-                                                args.y)
+                                               args.c1, args.q,
+                                               args.y)
     c2_datas = fire_gdp.get_fire_gdp_year_data(args.ff, args.gf,
-                                                args.c2, args.q,
-                                                args.y)
+                                               args.c2, args.q,
+                                               args.y)
     c3_datas = fire_gdp.get_fire_gdp_year_data(args.ff, args.gf,
-                                                args.c3, args.q,
-                                                args.y)
+                                               args.c3, args.q,
+                                               args.y)
     if (c1_datas == -3 or c2_datas == -3 or c3_datas == -3):
         print('Could not find information on country in fires file'
               ' or gdp file')
