@@ -90,12 +90,12 @@ def get_fire_gdp_year_data(fires_file, gdp_file,
     gdp_data = get_data(gdp_file, 0, target_country)
 
     # catch error in get_data
-    if (type(fire_data) == int or type(gdp_data) == int):
+    if (type(fire_data) == int or type(gdp_data) == int):  # noqa
         return -1  # exit code for bad file inputs
     else:  # get data worked
         if (len(fire_data) == 0 or len(gdp_data) <= 1):
             return -3  # exit code for country or year could not be found
-        if year_col >= len(fire_data):
+        if year_col >= len(fire_data[0]):
             return -2  # exit code for range error in target column or year col
 
         # search every row including info about the country
@@ -119,11 +119,13 @@ def get_fire_gdp_year_data(fires_file, gdp_file,
 
         return fires, gdps, years
 
-    def write_to_file(out_file, datas):
-        with open(out_file, 'w') as file:
-            for groups in zip(*datas):
-                strings_list = []
-                for x in groups:
-                    strings_list.append(x)
-                line = ','.join(strings_list) + '\n'
-                file.write(line)
+
+def write_to_file(out_file, datas):
+    with open(out_file, "w") as file:
+        for groups in zip(*datas):
+            strings_list = []
+            for x in groups:
+                strings_list.append(str(x))
+            line = ','.join(strings_list) + '\n'
+            file.write(line)
+    return 1
