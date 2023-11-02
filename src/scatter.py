@@ -64,6 +64,8 @@ def main():
         sys.exit(1)
 
     scatterplot = make_scatter(args.df, args.of, args.t, args.x, args.y)
+    if scatter_plot == -1:
+        sys.exit(1)
 
 
 if __name__ == '__main__':
