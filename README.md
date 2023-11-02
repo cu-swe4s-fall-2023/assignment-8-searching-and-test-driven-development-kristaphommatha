@@ -62,7 +62,7 @@ There is one outlier with a very high Savanna Fire count and relatively low GDP.
 Compared to Canada, however, its x-axis is on a much smaller scale and its y-axis is on a relatively similar scale. This shows that despite having similar GDP ranges, France still experiences much less Savanna fires. This makes sense, considering France's and Canada's differences in geographic features. 
 
 ### Germany
-![alt text](https://github.com/cu-swe4s-fall-2023/assignment-8-searching-and-test-driven-development-kristaphommatha/blob/main/data/Germany.png?raw=true)
+![alt text](https://github.com/cu-swe4s-fall-2023/assignment-8-searching-and-test-driven-development-kristaphommatha/blob/main/data/Germany.png?raw=true)<br>
 **Results**: Germany's scatter plot also appears to be skewed to the left, and its x-axis is orders of magnitude smaller than both France and Canada. It's y-axis scale is larger than France and Canada's, which shows that Germany has a higher range of GDP throughout the years and a very low proportion of Savanna fires. Considering Germany's geographic features and size compared to Canada, these numbers make sense. 
 
 #### Methods
