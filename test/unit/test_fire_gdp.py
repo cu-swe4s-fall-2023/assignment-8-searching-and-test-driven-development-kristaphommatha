@@ -26,11 +26,11 @@ class TestFireGDP(unittest.TestCase):
         func_return = fire_gdp.get_data('../data/test_data.csv',
                                         test_query_col, test_query_value,
                                         header=False)
-        expected = [['Query','1972','14.7237','0.0557','205.6077','0'],
-                    ['Query','1973','14.7237','0.0557','0','0'],
-                    ['Query','1975','14.7237','0.0557','196.5341','0'],
-                    ['Query','1953','1','2','3','4'],
-                    ['Query','1992','1','2','3','4']]
+        expected = [['Query', '1972', '14.7237', '0.0557', '205.6077', '0'],
+                    ['Query', '1973', '14.7237', '0.0557', '0', '0'],
+                    ['Query', '1975', '14.7237', '0.0557', '196.5341', '0'],
+                    ['Query', '1953', '1', '2', '3', '4'],
+                    ['Query', '1992', '1', '2', '3', '4']]
         self.assertListEqual(func_return, expected)
 
     def test_get_data_positive_yes_header(self):
@@ -40,11 +40,11 @@ class TestFireGDP(unittest.TestCase):
                                         test_query_col, test_query_value)
         expected = [['Search', 'Year', 'Savanna fires', 'Forest fires',
                      'Crop Residues', 'Rice Cultivation'],
-                    ['Query','1972','14.7237','0.0557','205.6077','0'],
-                    ['Query','1973','14.7237','0.0557','0','0'],
-                    ['Query','1975','14.7237','0.0557','196.5341','0'],
-                    ['Query','1953','1','2','3','4'],
-                    ['Query','1992','1','2','3','4']]
+                    ['Query', '1972', '14.7237', '0.0557', '205.6077', '0'],
+                    ['Query', '1973', '14.7237', '0.0557', '0', '0'],
+                    ['Query', '1975', '14.7237', '0.0557', '196.5341', '0'],
+                    ['Query', '1953', '1', '2', '3', '4'],
+                    ['Query', '1992', '1', '2', '3', '4']]
 
         self.assertListEqual(func_return, expected)
 
@@ -102,6 +102,14 @@ class TestFireGDP(unittest.TestCase):
         gdp_file = '../data/IMF_GDP_mini.csv'
         func_return = fire_gdp.get_fire_gdp_year_data(fires_file, gdp_file,
                                                       'Query', 2, 4)
+        expected_error_code = -3
+        self.assertEqual(func_return, expected_error_code)
+
+    def test_year_data_no_country(self):
+        fires_file = '../data/test_data.csv'
+        gdp_file = '../data/IMF_GDP_mini.csv'
+        func_return = fire_gdp.get_fire_gdp_year_data(fires_file, gdp_file,
+                                                      'NoCountry', 2, 4)
         expected_error_code = -3
         self.assertEqual(func_return, expected_error_code)
 
