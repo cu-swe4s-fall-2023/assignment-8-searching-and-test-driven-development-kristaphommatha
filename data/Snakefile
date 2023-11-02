@@ -1,0 +1,46 @@
+COUNTRY1 = "France"
+COUNTRY2 = "Canada"
+COUNTRY3 = "Germany"
+
+rule all:
+    input:
+        COUNTRY1 + ".png",
+        COUNTRY2 + ".png",
+        COUNTRY3 + ".png"
+
+rule make_scatters:
+    input:
+        COUNTRY1 + ".csv",
+        COUNTRY2 + ".csv",
+        COUNTRY3 + ".csv"
+    output:
+        COUNTRY1 + ".png",
+        COUNTRY2 + ".png",
+        COUNTRY3 + ".png"
+    conda:
+        "../environment.yml"
+    shell:
+        "python ../src/scatter.py --df {COUNTRY1}.csv --of {COUNTRY1}.png --t {COUNTRY1} --x 'Fires' --y 'GDP' \n"
+        "python ../src/scatter.py --df {COUNTRY2}.csv --of {COUNTRY2}.png --t {COUNTRY2} --x 'Fires' --y 'GDP' \n"
+        "python ../src/scatter.py --df {COUNTRY3}.csv --of {COUNTRY3}.png --t {COUNTRY3} --x 'Fires' --y 'GDP'"
+
+rule make_csvs:
+    input:
+        "Agrofood_co2_emission.csv",
+        "IMF_GDP.csv"
+    output:
+        COUNTRY1 + ".csv",
+        COUNTRY2 + ".csv",
+        COUNTRY3 + ".csv"
+    conda:
+        "../environment.yml"
+    shell:
+        "python ../src/make_data.py --ff Agrofood_co2_emission.csv --gf IMF_GDP.csv --c1 {COUNTRY1} --c2 {COUNTRY2} --c3 {COUNTRY3} --q 3"
+
+rule emission_data:
+    output:
+        "Agrofood_co2_emission.csv",
+        "IMF_GDP.csv"
+    shell:
+        "wget -O Agrofood_co2_emission.csv 'https://docs.google.com/uc?export=download&id=1Wytf3ryf9EtOwaloms8HEzLG0yjtRqxr' \n"
+        "wget -O IMF_GDP.csv 'https://docs.google.com/uc?export=download&id=1tuoQ9UTW_XRKgBOBaTLtGXh8h0ytKvFp'"
