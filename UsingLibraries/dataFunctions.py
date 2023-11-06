@@ -1,5 +1,4 @@
-import panda as pd
-import matplotlib as plt
+import pandas as pd
 
 
 def collect_fire_years_data(file_name, query_col, query_value, target_stats):
@@ -9,9 +8,9 @@ def collect_fire_years_data(file_name, query_col, query_value, target_stats):
         return -1
     except Exception as e:
         return None
-    target_stats.insert(0, 'Year')
+    target_and_year = ['Year'] + target_stats
     query_df = total_df[total_df[query_col] == query_value]
-    target_df = query_df[target_stats]
+    target_df = query_df[target_and_year]
     return target_df
 
 
