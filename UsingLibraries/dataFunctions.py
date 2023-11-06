@@ -1,5 +1,4 @@
 import panda as pd
-import matplotlib as plt
 
 
 def collect_fire_years_data(file_name, query_col, query_value, target_stats):
