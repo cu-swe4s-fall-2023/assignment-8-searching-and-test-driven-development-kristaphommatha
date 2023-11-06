@@ -15,7 +15,7 @@ def collect_fire_years_data(file_name, query_col, query_value, target_stats):
     return target_df
 
 
-def destroy_commas(x):  # function to remove commas from column values and turn to floats
+def destroy_commas(x):
     if x is not np.nan:
         return float(x.replace(',', ''))
     else:
@@ -36,4 +36,5 @@ def clean_data(file_name):
         if col == 'Country':
             continue
         total_df[col] = total_df[col].apply(destroy_commas)
+        total_df.to_csv('CLEAN_' + file_name, sep=',', index=False)
     return 0
