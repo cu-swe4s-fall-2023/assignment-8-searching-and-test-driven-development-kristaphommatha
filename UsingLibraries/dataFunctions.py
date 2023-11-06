@@ -36,5 +36,5 @@ def clean_data(file_name):
         if col == 'Country':
             continue
         total_df[col] = total_df[col].apply(destroy_commas)
-        total_df.to_csv('CLEAN_' + file_name, sep=',', index=False)
+        total_df.to_csv('../data/CLEAN_' + file_name, sep=',', index=False)
     return 0
