@@ -41,7 +41,7 @@ def clean_data(file_name):
     return 0
 
 
-def get_fire_gdp_year_data(fires_file, gdp_file, country, target_stat):
+def get_fire_gdp_year_data(fires_file, gdp_file, country, target_stats):
     try:
         gdp_df = pd.read_csv(gdp_file)
     except FileNotFoundError:
@@ -50,7 +50,7 @@ def get_fire_gdp_year_data(fires_file, gdp_file, country, target_stat):
         return None
 
     country_fires_df = collect_fire_years_data(fires_file, 'Area',
-                                               country, [target_stat])
+                                               country, target_stat)
 
     if country_fires_df != -1 or country_fires_df != 0:
         country_gdp_df = gdp_df[gdp_df['Country'] == country]
