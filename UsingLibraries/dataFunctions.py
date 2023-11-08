@@ -52,17 +52,35 @@ def get_fire_gdp_year_data(fires_file, gdp_file, country, target_stats):
     country_fires_df = collect_fire_years_data(fires_file, 'Area',
                                                country, target_stats)
 
-    if country_fires_df != -1 or country_fires_df != 0:
-        country_gdp_df = gdp_df[gdp_df['Country'] == country]
-        country_gdp_df = country_gdp.df.T.reset_index()
-        country_gdp_df = ['year', 'GDP']
-        country_gdp_df = country_gdp_df.iloc[1:, :]
-        country_gdp_df['year'] = country_gdp_df['year'].astype('int64')
-
-        country_df = pd.merge(country_fire_df, country_gdp_df,
+    country_gdp_df = gdp_df[gdp_df['Country'] == country]
+    country_gdp_df = country_gdp_df.T.reset_index()
+    country_gdp_df.columns = ['year', 'GDP']
+    country_gdp_df = country_gdp_df.iloc[1:, :]
+    country_gdp_df['year'] = country_gdp_df['year'].astype('int64')
+    # print(country_gdp_df)
+    try:
+        country_df = pd.merge(country_fires_df, country_gdp_df,
                               how='inner', left_on='Year',
                               right_on='year')
-        country_df = country_df.drop('year', axis=1)
-        return country_df
-    else:
+    except Exception as e:
         return -1
+
+    country_df = country_df.drop('year', axis=1)
+    return country_df
+
+
+def find_total_range(df1, df2, df3, df4, target_stat):
+    df_mins = []
+    df_maxs = []
+
+    df_mins.append(df1[target_stat].min())
+    df_mins.append(df2[target_stat].min())
+    df_mins.append(df3[target_stat].min())
+    df_mins.append(df4[target_stat].min())
+
+    df_maxs.append(df1[target_stat].max())
+    df_maxs.append(df2[target_stat].max())
+    df_maxs.append(df3[target_stat].max())
+    df_maxs.append(df4[target_stat].max())
+
+    return df_mins.min(), df_maxs.max()
