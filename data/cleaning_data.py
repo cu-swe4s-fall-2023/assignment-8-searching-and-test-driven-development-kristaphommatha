@@ -14,10 +14,10 @@ def main():
                             help='Name of data file to clean',
                             required=True)
         args = parser.parse_args()
-        
+
     except Exception as e:
         sys.exit(1)
-    
+
     dfs.clean_data(args.f)
     print('Cleanup completed')
 
