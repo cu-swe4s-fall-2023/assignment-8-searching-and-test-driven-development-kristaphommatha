@@ -27,6 +27,15 @@ class TestDataFunctions(unittest.TestCase):
                                              ['Savanna fires', 'Forest fires'])
         self.assertEqual(expected_df.size, output.size)
 
+    def test_destroy_commas(self):
+        output = dfs.destroy_commas('1,234.0')
+        self.assertEqual(output, 1234.0)
+
+    def test_clean_data_no_file(self):
+        no_file_code = -1
+        output = dfs.clean_data('NoFile.txt')
+        self.assertEqual(output, no_file_code)
+
 
 if __name__ == "__main__":
     unittest.main()
