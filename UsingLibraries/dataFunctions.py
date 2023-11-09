@@ -9,7 +9,7 @@ def collect_fire_years_data(file_name, country_col, country, target_stats):
     except Exception as e:
         return 0
     target_and_year = ['Year'] + target_stats
-    query_df = total_df[total_df[country_col].str.contains(country)]
+    query_df = total_df[total_df[country_col] == country]
     target_df = query_df[target_and_year]
     return target_df
 

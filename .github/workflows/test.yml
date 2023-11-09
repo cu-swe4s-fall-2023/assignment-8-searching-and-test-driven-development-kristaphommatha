@@ -47,6 +47,21 @@ jobs:
           cd test/func
           bash test_snakefile.sh
 
+  run_dataFunctions_unit_test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mamba-org/setup-micromamba@v1
+        with:
+          environment-file: environment.yml
+          environment-name: hw8
+      - run: |
+          cd test/unit
+          python test_dataFunctions.py
+
   run_style_check:
     runs-on: ubuntu-latest
     defaults:
@@ -61,4 +76,9 @@ jobs:
       - run: |
           cd src
           pycodestyle $(git ls-files "*.py")
+          cd ../UsingLibraries
+          pycodestyle $(git ls-files "*.py")
+          cd ../data
+          pycodestyle $(git ls-files "*.py")
+          
   
