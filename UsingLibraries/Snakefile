@@ -1,0 +1,33 @@
+rule all:
+    input:
+        "../data/Homework9.png"
+
+rule generate_fig:
+    input:
+        "../data/Agrofood_co2_emission.csv",
+        "../data/CLEAN_IMF_GDP.csv"
+    output:
+        "../data/Homework9.png"
+    conda:
+        "../environment.yml"
+    shell:
+        "python data_plotting.py"
+
+rule clean_data:
+    input:
+        "../data/IMF_GDP.csv"
+    output:
+        "../data/CLEAN_IMF_GDP.csv"
+    conda:
+        "../environment.yml"
+    shell:
+        "cd ../data \n"
+        "python cleaning_data.py --f IMF_GDP.csv"
+
+rule grab_data:
+    output:
+        "../data/Agrofood_co2_emission.csv",
+        "../data/IMF_GDP.csv"
+    shell:
+        "wget -O Agrofood_co2_emission.csv 'https://docs.google.com/uc?export=download&id=1Wytf3ryf9EtOwaloms8HEzLG0yjtRqxr' \n"
+        "wget -O IMF_GDP.csv 'https://docs.google.com/uc?export=download&id=1tuoQ9UTW_XRKgBOBaTLtGXh8h0ytKvFp'"
