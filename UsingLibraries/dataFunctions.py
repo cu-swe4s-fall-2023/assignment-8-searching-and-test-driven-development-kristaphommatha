@@ -83,4 +83,4 @@ def find_total_range(df1, df2, df3, df4, target_stat):
     df_maxs.append(df3[target_stat].max())
     df_maxs.append(df4[target_stat].max())
 
-    return df_mins.min(), df_maxs.max()
+    return min(df_mins), max(df_maxs)
