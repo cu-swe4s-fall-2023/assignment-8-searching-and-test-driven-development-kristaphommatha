@@ -15,6 +15,12 @@ class TestHash(unittest.TestCase):
     def test_get_index_int_key(self):
         self.assertIsNone(hash.get_index(0, 0))
 
+    def test_h_insert_N_equals_0(self):
+        self.assertIsNone(hash.h_insert('test', 3, 0))
+
+    def test_h_insert_int_key(self):
+        self.assertIsNone(hash.h_insert(1, 3, 10))
+
 
 if __name__ == "__main__":
     unittest.main()
