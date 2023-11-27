@@ -31,6 +31,14 @@ class TestHash(unittest.TestCase):
         expected = [[], [], [], [], [], [], [('test', 3)], [], [], []]
         self.assertListEqual(result, expected)
 
+    def test_h_insert_collision(self):
+        input1 = hash.h_insert('betatest', 3, 10)
+        input2 = hash.h_insert('test', 4, 10, input1)
+        input3 = hash.h_insert('hashbrown', 4, 10, input2)
+        expected = [[('betatest', 3), ('hashbrown', 4)], [], [], [],
+                    [], [], [('test', 4)], [], [], []]
+        self.assertListEqual(input3, expected)
+
 
 if __name__ == "__main__":
     unittest.main()
